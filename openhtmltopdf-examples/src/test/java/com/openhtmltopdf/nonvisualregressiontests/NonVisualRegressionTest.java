@@ -76,7 +76,6 @@ public class NonVisualRegressionTest {
         PdfRendererBuilder builder = new PdfRendererBuilder();
         builder.withHtmlContent(html, NonVisualRegressionTest.class.getResource(RES_PATH).toString());
         builder.toStream(actual);
-        builder.useFastMode();
         builder.testMode(true);
         config.configure(builder);
 
@@ -740,7 +739,6 @@ public class NonVisualRegressionTest {
 
         try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
             PdfRendererBuilder builder = new PdfRendererBuilder();
-            builder.useFastMode();
             builder.toStream(os);
             builder.withHtmlContent(header + html + footer, null);
             if (useFont) {
@@ -873,7 +871,6 @@ public class NonVisualRegressionTest {
             PdfRendererBuilder builder = new PdfRendererBuilder();
 
             builder.withDiagnosticConsumer(logs::add);
-            builder.useFastMode();
             builder.toStream(os);
             builder.withHtmlContent("<html style=\"invalid-prop: invalid-val\"><body>TEST</body></html>", null);
             builder.run();
@@ -937,7 +934,6 @@ public class NonVisualRegressionTest {
         PdfRendererBuilder builder = new PdfRendererBuilder();
 
         builder.withHtmlContent(html, null);
-        builder.useFastMode();
         builder.toStream(os);
 
         float lastContentLine;

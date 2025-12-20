@@ -45,7 +45,6 @@ public class JsoupNonVisualRegressionTest {
              PdfRendererBuilder builder = new PdfRendererBuilder();
              builder.withW3cDocument(doc, NonVisualRegressionTest.class.getResource(RES_PATH).toString());
              builder.toStream(actual);
-             builder.useFastMode();
              builder.testMode(true);
              config.configure(builder);
 
