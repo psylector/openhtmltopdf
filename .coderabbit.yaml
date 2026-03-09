@@ -1,0 +1,15 @@
+language: en
+reviews:
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  path_filters:
+    - "!**/*.flattened-pom.xml"
+    - "!**/expected*.png"
+    - "!**/actual*.png"
+  auto_review:
+    enabled: true
+    drafts: false
+chat:
+  auto_reply: true
