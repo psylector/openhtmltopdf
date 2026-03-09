@@ -43,7 +43,7 @@ jobs:
         uses: cicirello/jacoco-badge-generator@v2
         id: jacoco
         with:
-          jacoco-csv-file: "**/target/site/jacoco/jacoco.csv"
+          jacoco-csv-file: "openhtmltopdf-examples/target/site/jacoco-aggregate/jacoco.csv"
           on-missing-report: quiet
           generate-branches-badge: true
           generate-summary: true
@@ -51,7 +51,7 @@ jobs:
         uses: madrapps/jacoco-report@v1.7.1
         with:
           paths: |
-            **/target/site/jacoco/jacoco.xml
+            openhtmltopdf-examples/target/site/jacoco-aggregate/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 0
           min-coverage-changed-files: 0
