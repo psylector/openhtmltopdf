@@ -78,6 +78,43 @@ in our distributions and in our source tree.
 
 An exception to this is the pdf-a testing module, which is licensed under the GPL. This module is not published to GitHub Packages and is for testing only.
 
+## KNOWN ISSUES (PDF/UA-1)
+
+### CSS `float` breaks structure tree hierarchy
+
+When `usePdfUaAccessibility(true)` is enabled, floated elements (`float: left`, `float: right`) are placed at the wrong level in the PDF structure tree. The CSS renderer paints floats in a separate layer, and the accessibility helper attaches them as siblings of the document root instead of keeping them inside their DOM parent.
+
+**Example:** For this HTML:
+```html
+<body>
+  <h1>Title</h1>
+  <div style="float: left; width: 50%"><p>Left column</p></div>
+  <div style="float: right; width: 50%"><p>Right column</p></div>
+  <p>Footer</p>
+</body>
+```
+
+The structure tree becomes:
+```text
+Document
+├── Div (body) → H1, P(Footer)   ← normal flow only
+├── Div → P(Left column)          ← float escaped from body
+└── Div → P(Right column)         ← float escaped from body
+```
+
+This violates PDF/UA-1 rule 7.4.2-1 (logical reading order).
+
+**Workaround:** Replace `float` with `display: table` / `table-cell` layout, which produces a correct structure tree:
+
+```html
+<div style="display: table; width: 100%">
+  <div style="display: table-cell; width: 50%"><p>Left column</p></div>
+  <div style="display: table-cell; width: 50%"><p>Right column</p></div>
+</div>
+```
+
+This is an upstream issue inherited from [openhtmltopdf/openhtmltopdf](https://github.com/openhtmltopdf/openhtmltopdf).
+
 ## FAQ
 
 + OPEN HTML TO PDF is tested with Temurin 8, 11, 17 and 21. It requires at least Java 8 to run.
