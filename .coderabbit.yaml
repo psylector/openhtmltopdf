@@ -1,5 +1,6 @@
 language: en
 reviews:
+  profile: assertive
   request_changes_workflow: false
   high_level_summary: true
   poem: false
@@ -11,5 +12,50 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+  tools:
+    eslint:
+      enabled: false
+    biome:
+      enabled: false
+    oxlint:
+      enabled: false
+    ruff:
+      enabled: false
+    pylint:
+      enabled: false
+    swiftlint:
+      enabled: false
+    shellcheck:
+      enabled: false
+    hadolint:
+      enabled: false
+    checkov:
+      enabled: false
+    tflint:
+      enabled: false
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    pmd:
+      enabled: true
+    detekt:
+      enabled: false
+    markdownlint:
+      enabled: true
+    rubocop:
+      enabled: false
+    buf:
+      enabled: false
+    phpstan:
+      enabled: false
+    golangci-lint:
+      enabled: false
+    cppcheck:
+      enabled: false
+    semgrep:
+      enabled: true
+    gitleaks:
+      enabled: true
 chat:
   auto_reply: true
