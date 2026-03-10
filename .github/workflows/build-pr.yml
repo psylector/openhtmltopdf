@@ -56,28 +56,3 @@ jobs:
           min-coverage-overall: 0
           min-coverage-changed-files: 0
           title: Code Coverage
-
-  release-dev:
-    name: Create release - dev
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 8
-          cache: maven
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-      - name: Deploy dev snapshot to GitHub Packages
-        run: mvn -B deploy -e -Drevision=dev-${{ github.sha }}-SNAPSHOT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
