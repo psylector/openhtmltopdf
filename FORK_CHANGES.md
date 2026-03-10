@@ -105,9 +105,10 @@ Additional fixes in the same PR:
 
 ---
 
-## Current branch (PSY-82) — veraPDF PDF/UA-1 validation + page-break heading test
+## Release 1.1.41 — veraPDF PDF/UA-1 validation + page-break heading test
 
-**Branch:** `psylector/psy-82-add-verapdf-validation-and-page-break-structure-tree-tests`
+**PR:** [#4](https://github.com/psylector/openhtmltopdf/pull/4)
+**Commit:** `5bd09d98`
 **Ticket:** PSY-82
 
 ### Changes
@@ -126,6 +127,11 @@ veraPDF validation revealed that link annotations were missing the `Contents` ke
 #### 3. Page-break heading structure tree test
 
 New test `testHeadingsAcrossPageBreaksPreserveOrder` in `NonVisualRegressionTest` verifies that headings split across page breaks preserve H1→H2→H3 reading order in the structure tree.
+
+#### 4. CI/config improvements
+
+- Removed unused `release-dev` job from PR workflow (dev SNAPSHOT publishing)
+- CodeRabbit: switched to `assertive` profile, disabled irrelevant linting tools (JS/Python/Go/Docker/etc.), kept pmd, yamllint, actionlint, markdownlint, semgrep, gitleaks
 
 ### Files changed (upstream-relevant)
 
@@ -147,7 +153,7 @@ New test `testHeadingsAcrossPageBreaksPreserveOrder` in `NonVisualRegressionTest
 | 7.18.1-2 | Link annotations shall be nested in /Link structure elements | 1.1.40 (PSY-78) |
 | 7.18.5-1 | /Link shall contain OBJR (annotation object reference) | 1.1.40 (PSY-78) |
 | 7.18.5-2 | /Link shall include tagged content identifying the link | 1.1.40 (PSY-78) |
-| §14.9.3 | Link annotations shall have alternate description (Contents key) | PSY-82 |
+| §14.9.3 | Link annotations shall have alternate description (Contents key) | 1.1.41 (PSY-82) |
 
 ## Upstream PR scope
 
@@ -156,4 +162,4 @@ For the upstream contribution, the following changes are relevant (excluding for
 1. **`PdfBoxAccessibilityHelper.java`** — DOM order sorting + running footer link structure
 2. **`SimplePainter.java`** — `startStructure(REPLACED)` for replaced elements
 3. **`PdfBoxFastLinkManager.java`** — `setLinkContents()` for link annotation alt text
-4. **All test files** — 9 new tests covering the above fixes
+4. **All test files** — 10 new tests (7 in NonVisualRegressionTest + 2 in PdfUaTester + 1 page-break heading test)
